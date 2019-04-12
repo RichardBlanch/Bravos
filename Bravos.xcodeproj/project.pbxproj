@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		635BFAAF225FD44800980C98 /* APIResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFAAE225FD44800980C98 /* APIResponseHandler.swift */; };
+		635BFAB1225FD4B000980C98 /* APIRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFAB0225FD4B000980C98 /* APIRequestHandler.swift */; };
+		635BFAB5225FE46C00980C98 /* FeedRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFAB4225FE46C00980C98 /* FeedRefresher.swift */; };
+		635BFAB7225FE9DE00980C98 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFAB6225FE9DE00980C98 /* HTTPMethod.swift */; };
+		635BFAB9225FE9F600980C98 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFAB8225FE9F600980C98 /* HTTPHeader.swift */; };
+		635BFABB225FEA8500980C98 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFABA225FEA8500980C98 /* API.swift */; };
+		635BFABD226109D900980C98 /* BravosError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFABC226109D900980C98 /* BravosError.swift */; };
+		635BFABF22610C5F00980C98 /* APIRequestHandlerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFABE22610C5F00980C98 /* APIRequestHandlerLoader.swift */; };
 		63F8EFD620DECD25001A4E30 /* Bravos.h in Headers */ = {isa = PBXBuildFile; fileRef = 63F8EFD420DECD25001A4E30 /* Bravos.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63F8EFDD20DECD2E001A4E30 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8EFDC20DECD2E001A4E30 /* APIRequest.swift */; };
 		63F8EFDF20DECD41001A4E30 /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8EFDE20DECD41001A4E30 /* APIRequestLoader.swift */; };
@@ -16,6 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		635BFAAE225FD44800980C98 /* APIResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseHandler.swift; sourceTree = "<group>"; };
+		635BFAB0225FD4B000980C98 /* APIRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestHandler.swift; sourceTree = "<group>"; };
+		635BFAB4225FE46C00980C98 /* FeedRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRefresher.swift; sourceTree = "<group>"; };
+		635BFAB6225FE9DE00980C98 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		635BFAB8225FE9F600980C98 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
+		635BFABA225FEA8500980C98 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		635BFABC226109D900980C98 /* BravosError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravosError.swift; sourceTree = "<group>"; };
+		635BFABE22610C5F00980C98 /* APIRequestHandlerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestHandlerLoader.swift; sourceTree = "<group>"; };
 		63F8EFD120DECD25001A4E30 /* Bravos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bravos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F8EFD420DECD25001A4E30 /* Bravos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bravos.h; sourceTree = "<group>"; };
 		63F8EFD520DECD25001A4E30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,11 +72,19 @@
 		63F8EFD320DECD25001A4E30 /* Bravos */ = {
 			isa = PBXGroup;
 			children = (
-				63F8EFD420DECD25001A4E30 /* Bravos.h */,
-				63F8EFD520DECD25001A4E30 /* Info.plist */,
+				635BFABA225FEA8500980C98 /* API.swift */,
 				63F8EFDC20DECD2E001A4E30 /* APIRequest.swift */,
+				635BFAB0225FD4B000980C98 /* APIRequestHandler.swift */,
+				635BFABE22610C5F00980C98 /* APIRequestHandlerLoader.swift */,
 				63F8EFDE20DECD41001A4E30 /* APIRequestLoader.swift */,
 				63F8F02120DED269001A4E30 /* APIRequestMonitor.swift */,
+				635BFAAE225FD44800980C98 /* APIResponseHandler.swift */,
+				63F8EFD420DECD25001A4E30 /* Bravos.h */,
+				635BFABC226109D900980C98 /* BravosError.swift */,
+				635BFAB4225FE46C00980C98 /* FeedRefresher.swift */,
+				635BFAB8225FE9F600980C98 /* HTTPHeader.swift */,
+				635BFAB6225FE9DE00980C98 /* HTTPMethod.swift */,
+				63F8EFD520DECD25001A4E30 /* Info.plist */,
 				63F8F01320DECE5D001A4E30 /* MockURLProtocol.swift */,
 				63F8F03E20DEF41F001A4E30 /* URLSession+Bravos.swift */,
 			);
@@ -110,7 +134,7 @@
 				TargetAttributes = {
 					63F8EFD020DECD25001A4E30 = {
 						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -146,10 +170,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				635BFABF22610C5F00980C98 /* APIRequestHandlerLoader.swift in Sources */,
+				635BFABB225FEA8500980C98 /* API.swift in Sources */,
+				635BFAB5225FE46C00980C98 /* FeedRefresher.swift in Sources */,
 				63F8F01420DECE5D001A4E30 /* MockURLProtocol.swift in Sources */,
+				635BFAB9225FE9F600980C98 /* HTTPHeader.swift in Sources */,
 				63F8F02220DED269001A4E30 /* APIRequestMonitor.swift in Sources */,
 				63F8EFDD20DECD2E001A4E30 /* APIRequest.swift in Sources */,
 				63F8F03F20DEF41F001A4E30 /* URLSession+Bravos.swift in Sources */,
+				635BFABD226109D900980C98 /* BravosError.swift in Sources */,
+				635BFAB7225FE9DE00980C98 /* HTTPMethod.swift in Sources */,
+				635BFAAF225FD44800980C98 /* APIResponseHandler.swift in Sources */,
+				635BFAB1225FD4B000980C98 /* APIRequestHandler.swift in Sources */,
 				63F8EFDF20DECD41001A4E30 /* APIRequestLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,7 +331,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -325,7 +357,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = blanch.Bravos;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

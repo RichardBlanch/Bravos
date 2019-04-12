@@ -8,63 +8,64 @@
 
 import Foundation
 
-public enum Result<T: APIRequest> {
-    case success(T.ResponseDataType)
-    case failure(Error)
-}
-
-
-open class APIRequestLoader<T: APIRequest> {
-
-    public let apiRequest: T
-    public let urlSession: URLSession
-    private let requestInfo: T.RequestDataType
-    private unowned let networkMonitor = APIRequestMonitor.shared
-
-    public init(apiRequest: T, requestInfo: T.RequestDataType, urlSession: URLSession = .shared) {
-        self.apiRequest = apiRequest
-        self.urlSession = urlSession
-        self.requestInfo = requestInfo
-    }
-
-    public func loadAPIRequest(completionHandler: @escaping (Result<T>) -> Void) {
+public class APIRequestLoader {
+    
+    public static func loadAPIRequest<T: APIRequest>(_ apiRequest: T, using urlSession: URLSession = URLSession.shared, completionHandler: @escaping ( Result<T.ResponseDataType, BravosError>) -> Void) {
         do {
-            let urlRequest = try apiRequest.makeRequest(from: requestInfo)
+            let urlRequest = try apiRequest.makeRequest()
             guard !isRequestInProgress(for: urlRequest.url) else { return }
             addURLToNetworkRegulator(url: urlRequest.url)
 
             urlSession.dataTask(with: urlRequest) {  data, response, error in
                 self.removeURLFromNetworkMonitor(url: response?.url)
-
-                guard error == nil else { completionHandler(.failure(error!)); return }
-                guard let data = data else { completionHandler(.failure( NSError.init(domain: "BRAVOS COULD NOT RETRIEVE DATA", code: 0, userInfo: nil))); return }
-
+                
+                if let bravosError = self.bravosError(from: data, error: error, response: response) {
+                    completionHandler(.failure(bravosError))
+                    return
+                }
+                
                 do {
-                    let parsedResponse = try self.apiRequest.parseResponse(from: data)
+                    let parsedResponse = try apiRequest.parseResponse(from: data!)
                     completionHandler(.success(parsedResponse))
                 } catch {
-                    completionHandler(.failure(error))
+                    completionHandler(.failure(.genericError(error)))
                 }
 
             }.resume()
 
         } catch {
-            completionHandler(.failure(error))
+            completionHandler(.failure(.genericError(error)))
         }
     }
+    
+    private static func bravosError(from data: Data?, error: Error?, response: URLResponse?) -> BravosError? {
+        let bravosError: BravosError?
 
-    private func addURLToNetworkRegulator(url: URL?) {
-        guard let url = url else { return }
-        networkMonitor.add(url: url)
+        if error != nil {
+            bravosError = .genericError(error)
+        } else if let httpURLResponse = response as? HTTPURLResponse, (400...499).contains(httpURLResponse.statusCode) {
+            bravosError = .httpURLResponseError(httpURLResponse)
+        } else if data == nil {
+            bravosError = .noData
+        } else {
+            bravosError = nil
+        }
+ 
+        return bravosError
     }
 
-    private func removeURLFromNetworkMonitor(url: URL?) {
+    private static func addURLToNetworkRegulator(url: URL?) {
         guard let url = url else { return }
-        networkMonitor.remove(url: url)
+        APIRequestMonitor.shared.add(url: url)
     }
 
-    private func isRequestInProgress(for url: URL?) -> Bool {
+    private static func removeURLFromNetworkMonitor(url: URL?) {
+        guard let url = url else { return }
+        APIRequestMonitor.shared.remove(url: url)
+    }
+
+    private static func isRequestInProgress(for url: URL?) -> Bool {
         guard let url = url else { return false }
-        return networkMonitor.hasURL(url)
+        return APIRequestMonitor.shared.hasURL(url)
     }
 }

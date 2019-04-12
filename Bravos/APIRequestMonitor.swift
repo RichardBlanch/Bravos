@@ -11,26 +11,18 @@ import Foundation
 class APIRequestMonitor {
     public static let shared = APIRequestMonitor()
 
-    private var _currentlyRequestedURLS = Set<URL>()
-    private var currentlyRequestedURLS: Set<URL> {
-        get {
-            return DispatchQueue.global(qos: .default).sync(execute: { return _currentlyRequestedURLS })
-        }
-
-        set {
-            DispatchQueue.global(qos: .default).sync(execute: { _currentlyRequestedURLS = newValue })
-        }
-    }
+    private let dispatchQueue = DispatchQueue(label: "com.APIRequestMonitorQueue")
+    private var currentlyRequestedURLS = Set<URL>()
 
     func hasURL(_ url: URL) -> Bool {
-        return currentlyRequestedURLS.contains(url)
+        return dispatchQueue.sync { return currentlyRequestedURLS.contains(url) }
     }
 
     func add(url: URL) {
-        currentlyRequestedURLS.insert(url)
+        _ = dispatchQueue.sync { currentlyRequestedURLS.insert(url) }
     }
 
     func remove(url: URL) {
-        currentlyRequestedURLS.remove(url)
+        _ = dispatchQueue.sync { currentlyRequestedURLS.remove(url) }
     }
 }
